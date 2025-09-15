@@ -22,10 +22,11 @@ public class Appointment {
 
     private LocalDateTime dateTime;
 
+    @OneToOne
     private Service service;
 
     private AppointmentStatus status;
 
-    @ManyToOne
-    private List<Pet> pet;
+    @OneToOne
+    private Pet pet;
 }

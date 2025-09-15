@@ -19,6 +19,7 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
     private Specie specie;
 
     private String gender;
@@ -29,6 +30,7 @@ public class Pet {
 
     private String color;
 
+    @OneToMany
     private List<Allergy> allergy;
 
     private VaccinationStatus vaccinationStatus;
