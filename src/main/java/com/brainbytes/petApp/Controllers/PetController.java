@@ -1,7 +1,7 @@
 package com.brainbytes.petApp.Controllers;
 
 import com.brainbytes.petApp.Entities.Pet;
-import com.brainbytes.petApp.Repositories.PetRepositry;
+import com.brainbytes.petApp.Repositories.PetRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
@@ -18,17 +18,17 @@ import java.util.List;
 @Data
 public class PetController {
 
-    private final PetRepositry petRepositry;
+    private final PetRepository petRepository;
 
     @PostMapping(path = "/pet")
     public Pet AddPet(@RequestBody Pet pet){
-        return petRepositry.save(pet);
+        return petRepository.save(pet);
     }
 
 
     @GetMapping(path = "/pets")
     public List<Pet> GetAllPets(){
-        return petRepositry.findAll();
+        return petRepository.findAll();
     }
 
 
