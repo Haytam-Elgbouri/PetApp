@@ -2,6 +2,7 @@ package com.brainbytes.petApp.Controllers;
 
 import com.brainbytes.petApp.Entities.Pet;
 import com.brainbytes.petApp.Repositories.PetRepository;
+import com.brainbytes.petApp.Services.PetService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
@@ -15,42 +16,31 @@ import java.util.List;
 @Data
 public class PetController {
 
-    private final PetRepository petRepository;
+    private final PetService petService;
 
     @PostMapping(path = "/pet")
     public Pet AddPet(@RequestBody Pet pet){
-        return petRepository.save(pet);
+        return petService.AddPet(pet);
     }
-
 
     @GetMapping(path = "/pets")
     public List<Pet> GetAllPets(){
-        return petRepository.findAll();
+        return petService.GetAllPets();
     }
 
     @GetMapping(path = "/pet/{id}")
     public Pet GetPetById(@PathVariable Long id){
-        return petRepository.findById(id).orElse(null);
+        return petService.GetPetById(id);
     }
 
     @PutMapping(path = "/pet/{id}")
     public Pet UpdatePetById(@PathVariable Long id, @RequestBody Pet petDetails){
-        return petRepository.findById(id).map(pet ->{
-            pet.setAge(petDetails.getAge());
-            pet.setColor(petDetails.getColor());
-            pet.setGender(petDetails.getGender());
-            pet.setWeight(petDetails.getWeight());
-            pet.setVaccinationStatus(petDetails.getVaccinationStatus());
-            pet.setNote(petDetails.getNote());
-            pet.setAllergy(petDetails.getAllergy());
-            pet.setMedicalHistory(petDetails.getMedicalHistory());
-            return petRepository.save(pet);
-        }).orElse(null);
+        return petService.UpdatePetById(id,petDetails);
     }
 
     @DeleteMapping(path = "/pet/{id}")
     public void DeletePetById(@PathVariable Long id){
-        petRepository.deleteById(id);
+        petService.DeletePetById(id);
     }
 
 }
