@@ -35,7 +35,7 @@ public class ClientController {
     };
 
     @DeleteMapping("/client/{id}")
-    void DeleteClientById(@PathVariable Long id){
+    public void DeleteClientById(@PathVariable Long id){
         clientService.DeleteClientById(id);
     }
 
